@@ -5,7 +5,7 @@ from silx.gui.plot import Plot2D, ImageView
 numPer = 40 # Number of ID Periods (without counting for terminations
 undPer = 0.1 # Period Length [m]
 Kv = 1.92 # 400 eV 3rd harmonic
-photon_energy = 399.8 # 3rd harmonic
+photon_energy = 370 #399.8 # 3rd harmonic
 
 import scipy.constants as codata
 def magnetic_field_from_K(K, period_length):
@@ -267,9 +267,7 @@ if(srwl_uti_proc_is_master()):
     print('done')    
     
     x, z, intensity_source_dimension = loadNumpyFormat("intensity_source_dimension.dat")    
-    
-    plot_2D(x, z, intensity_source_dimension, "intensity_source_dimension", xlabel="X [m]", ylabel="Z [m]")
-   
+       
     # 2 calculate intensity distribution ME convoluted at far field to express it in angular coordinates 
 
     print('   Performing Initial Single-E Electric Field calculation ... ', end='')
@@ -293,7 +291,16 @@ if(srwl_uti_proc_is_master()):
     
     x_first, z_first, intensity_angular_distribution = loadNumpyFormat("intensity_angular_distribution.dat")    
 
+    #plot_2D(x, z, intensity_source_dimension, "intensity_source_dimension", xlabel="X [m]", ylabel="Z [m]")
     #plot_2D(x_first, z_first, intensity_angular_distribution, "intensity_angular_distribution", xlabel="X' [rad]", ylabel="Z' [rad]")
 
-out_object = x, z, intensity_source_dimension, x_first, z_first, intensity_angular_distribution
+    output = []
+    output.append(x)
+    output.append(z)
+    output.append(intensity_source_dimension)
+    output.append(x_first)
+    output.append(z_first)
+    output.append(intensity_angular_distribution)
+        
+out_object = output
     

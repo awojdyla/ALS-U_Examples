@@ -64,24 +64,23 @@ vls_oe_number = shadow_beam._oe_number
 vls_history_element = shadow_beam.getOEHistory(shadow_beam._oe_number)
 
 # SHADOWOUI OBJECTS: WRAPPERS OF THE NATIVE SHADOW3 OBJECTS 
-# MAKE A DUPLICATE TO BE SURE TO NOT AFFECT THE REST OF SHADOWOUI SIMULATION!
-shadowOui_input_beam = vls_history_element._input_beam.duplicate(history=False)
-shadowOui_VLS_before_tracing = vls_history_element._shadow_oe_start.duplicate()
-#shadowOui_VLS_after_tracing = vls_history_element._shadow_oe_end.duplicate()
+shadowOui_input_beam = vls_history_element._input_beam
+shadowOui_VLS_before_tracing = vls_history_element._shadow_oe_start
+#shadowOui_VLS_after_tracing = vls_history_element._shadow_oe_end
 
 #ticket2D = shadowOui_input_beam._beam.histo2(col_h=1, col_v=3, nbins=100, ref=23)
 
 # VARIABLE TO SCAN IS (JUST AN EXAMPLE) COEFFIECIENT C3 TO OPTIMIZE GRATING
 
-C0 = shadow3_VLS.RULING
-C1 = shadow3_VLS.RUL_A1
-C2 = shadow3_VLS.RUL_A2
-C3 = shadow3_VLS.RUL_A3
+C0 = shadowOui_VLS_before_tracing._oe.RULING
+C1 = shadowOui_VLS_before_tracing._oe.RUL_A1
+C2 = shadowOui_VLS_before_tracing._oe.RUL_A2
+C3 = shadowOui_VLS_before_tracing._oe.RUL_A3
 
 print("RULING DENSITY", C0, C1, C2, C3)
 
 # 10 VALUES
-c3_values = -5 + numpy.arange(0, 41)*(10/20)
+c3_values = -5 + C3 + numpy.arange(0, 41)*(10/40)
 
 # plotting range
 x_min = -0.15
@@ -97,8 +96,9 @@ best_focus_positions = numpy.zeros(len(c3_values))
 for index in range(0, len(c3_values)):
     
     # NATIVE SHADOW3 OBJECTS 
-    shadow3_beam = shadowOui_input_beam.duplicate()._beam # KEEP THE ORIGINAL UNTOUCHED
-    shadow3_VLS = shadowOui_VLS_before_tracing.duplicate()._oe # KEEP THE ORIGINAL UNTOUCHED
+    # MAKE A DUPLICATE TO BE SURE TO NOT AFFECT THE REST OF SHADOWOUI SIMULATION!
+    shadow3_beam = shadowOui_input_beam.duplicate(copy_rays=True, history=False)._beam # KEEP THE ORIGINAL UNTOUCHED
+    shadow3_VLS  = shadowOui_VLS_before_tracing.duplicate()._oe                        # KEEP THE ORIGINAL UNTOUCHED
 
     shadow3_VLS.RUL_A3= c3_values[index]
         
@@ -107,22 +107,25 @@ for index in range(0, len(c3_values)):
     # 2D DISTRIBUTION X,Z TO OBTAIN THE FOCAL SPOT DIMENSION 
     ticket2D = shadow3_beam.histo2(col_h=1, col_v=3, nbins=nbins, ref=23, xrange=[x_min, x_max], yrange=[z_min, z_max])
     
+    histogram = ticket2D["histogram"]
+    fwhms[index] = ticket2D["fwhm_v"]
+
+    for ix in range(nbins):
+        for iz in range(nbins):
+             stack_result[index, ix, iz] = histogram[ix, iz]
+
     # FOCUS POSITION
     ticketFocus = ST.focnew(shadow3_beam, mode=0, center=[0.0, 0.0])    
     
     best_focus_positions[index] = ticketFocus['z_waist']
     
-    histogram = ticket2D["histogram"]
-    fwhms[index] = ticket2D["fwhm_v"]*1e4
-        
-    for ix in range(nbins):
-        for iz in range(nbins):
-             stack_result[index, ix, iz] = histogram[ix, iz]
+    print("C3, FWHM, Focus", shadow3_VLS.RUL_A3, fwhms[index], best_focus_positions[index])
+    
 
 
-plot_data3D(stack_result, c3_values, numpy.linspace(x_min, x_max, nbins), numpy.linspace(z_min, z_max, nbins), "SPOT SIZE AT IMAGE PLANE", "X [cm]", "Z [cm]")
-plot_data1D(c3_values, fwhms, "SPOT VERTICAL SIZE", "C3", "Z FWHM")
-plot_data1D(c3_values, best_focus_positions, "VERTICAL FOCUS RELATIVE POSITION", "C3", "Distance")
+plot_data3D(stack_result, c3_values, numpy.linspace(x_min, x_max, nbins)*1e4, numpy.linspace(z_min, z_max, nbins)*1e4, "SPOT SIZE AT IMAGE PLANE", "X [um]", "Z [um]")
+plot_data1D(c3_values, fwhms*1e4, "SPOT VERTICAL SIZE", "C3 [l/cm]^3", "Z FWHM [um]")
+plot_data1D(c3_values, best_focus_positions, "VERTICAL FOCUS RELATIVE POSITION", "C3 [l/cm]^3", "Distance [cm]")
 
 
 

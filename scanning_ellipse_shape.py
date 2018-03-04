@@ -126,7 +126,7 @@ for index in range(0, len(axmaj_values)):
     shadow3_beam.traceOE(shadow3_kb_hrm, kb_hrm_oe_number) # 
       
     # 2D DISTRIBUTION X,Z TO OBTAIN THE FOCAL SPOT DIMENSION 
-    ticket2D = shadow3_beam.histo2(col_h=1, col_v=3, nbins=nbins, ref=23, xrange=[x_min, x_max], yrange=[z_min, z_max])
+    ticket2D = shadow3_beam.histo2(col_h=1, col_v=3, nbins=nbins, ref=23, nolost=1, xrange=[x_min, x_max], yrange=[z_min, z_max])
     
     histogram = ticket2D["histogram"]
     fwhms[index] = ticket2D["fwhm_v"]

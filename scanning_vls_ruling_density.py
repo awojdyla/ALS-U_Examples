@@ -105,7 +105,7 @@ for index in range(0, len(c3_values)):
     shadow3_beam.traceOE(shadow3_VLS, vls_oe_number) # 
       
     # 2D DISTRIBUTION X,Z TO OBTAIN THE FOCAL SPOT DIMENSION 
-    ticket2D = shadow3_beam.histo2(col_h=1, col_v=3, nbins=nbins, ref=23, xrange=[x_min, x_max], yrange=[z_min, z_max])
+    ticket2D = shadow3_beam.histo2(col_h=1, col_v=3, nbins=nbins, ref=23, nolost=1, xrange=[x_min, x_max], yrange=[z_min, z_max])
     
     histogram = ticket2D["histogram"]
     fwhms[index] = ticket2D["fwhm_v"]
@@ -122,10 +122,9 @@ for index in range(0, len(c3_values)):
     print("C3, FWHM, Focus", shadow3_VLS.RUL_A3, fwhms[index], best_focus_positions[index])
     
 
-
-plot_data3D(stack_result, c3_values, numpy.linspace(x_min, x_max, nbins)*1e4, numpy.linspace(z_min, z_max, nbins)*1e4, "SPOT SIZE AT IMAGE PLANE", "X [um]", "Z [um]")
 plot_data1D(c3_values, fwhms*1e4, "SPOT VERTICAL SIZE", "C3 [l/cm]^3", "Z FWHM [um]")
 plot_data1D(c3_values, best_focus_positions, "VERTICAL FOCUS RELATIVE POSITION", "C3 [l/cm]^3", "Distance [cm]")
+plot_data3D(stack_result, c3_values, numpy.linspace(x_min, x_max, nbins), numpy.linspace(z_min, z_max, nbins), "SPOT SIZE AT IMAGE PLANE", "X [um]", "Z [um]")
 
 
 

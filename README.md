@@ -28,7 +28,7 @@ For example, here is the beam without Hybrid
 and here with Hybrid
 ![with Hybrid](https://github.com/awojdyla/ALS-U_Examples/blob/master/images/hybrid_w.png "with hybrid")
 
-As a general rule, one should abstain to daisy chain Hybrid screens, since each time the beam undergoes a resampling.
+As a general rule, one should abstain from daisy-chaining Hybrid screens, since each time the beam undergoes a resampling.
 ![Hybrid nono](https://github.com/awojdyla/ALS-U_Examples/blob/master/images/hybrid_nono.png "do not do this!")
 
 ## Scanning and looping

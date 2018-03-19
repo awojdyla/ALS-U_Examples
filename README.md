@@ -15,22 +15,6 @@ The initial profile ws generated using xoppy (which itself call SRW)
 
 ## Creating a source based on SRW calculation
 
-
-## Example were HYBRID fails
-The file [Hybrid_test](https://github.com/awojdyla/ALS-U_Examples/blob/master/Hybrid_fails.ows) provides an example where Oasys fails
-![Hybrid test](https://github.com/awojdyla/ALS-U_Examples/blob/master/images/hybrid_test.png "Hybrid test")
-
-Hybrid should *not* be used when the aberrations are quite large (error figure larger than the wavelength), since the resampling of the beam to account for diffraction effects will destroy any correlations between ray slope an position, typical of slope-error bound optics.
-
-For example, here is the beam without Hybrid
-![without Hybrid](https://github.com/awojdyla/ALS-U_Examples/blob/master/images/hybrid_wo.png "without hybrid")
-
-and here with Hybrid
-![with Hybrid](https://github.com/awojdyla/ALS-U_Examples/blob/master/images/hybrid_w.png "with hybrid")
-
-As a general rule, one should abstain from daisy-chaining Hybrid screens, since each time the beam undergoes a resampling.
-![Hybrid nono](https://github.com/awojdyla/ALS-U_Examples/blob/master/images/hybrid_nono.png "do not do this!")
-
 ## Scanning and looping
 
 `scanning_ellipse_shape.py` and 

@@ -1,0 +1,51 @@
+
+import Shadow
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy.interpolate as interpolate
+
+# extract data (position and angles)
+x1 = in_object_1._beam.getshonecol(1)
+z1 = in_object_1._beam.getshonecol(3)
+xp = in_object_1._beam.getshonecol(4)
+zp = in_object_1._beam.getshonecol(6)
+
+# from the angles, extract magnitude and direction
+slo = np.sqrt(xp**2+zp**2)
+ang = np.arctan2(zp,xp)
+
+# interpolare on a linear grid to allow easier processing
+scalefactor = 1E6
+Nx = 101
+Nz = Nx
+x_lin = np.linspace(np.min(x1), np.max(x1), Nx)
+z_lin = np.linspace(np.min(z1), np.max(z1), Nx)
+X, Z = np.meshgrid(x_lin,z_lin)
+slopes = interpolate.griddata((x1,z1),slo,(X,Z),method='linear')
+angles = interpolate.griddata((x1,z1),ang,(X,Z),method='linear')
+
+# compute the gradients
+grad_x = slopes*np.cos(angles)
+grad_z = slopes*np.sin(angles)
+
+# integrate the gradients (from the center) to get the wavefront
+xr = np.cumsum(-grad_x[:,51: 0:-1],axis=1)
+xl = np.cumsum( grad_x[:,50:-1: 1],axis=1)
+xx = np.concatenate((np.flip(xr,axis=1),xl),axis=1)
+
+zr = np.cumsum(-grad_z[51: 0:-1,:],axis=0)
+zl = np.cumsum( grad_z[50:-1: 1,:],axis=0)
+zz = np.concatenate((np.flip(zr,axis=0),zl),axis=0)
+
+# here's the wavefront (the units depend of the backprogation distance)
+wfe_au = (xx+zz)
+
+#export for later user
+out_object = wfe_au
+
+# show the results
+plt.imshow(wfe_au,extent=(X[0,0]*scalefactor,X[0,-1]*scalefactor,Z[-1,0]*scalefactor,Z[0,0]*scalefactor))
+plt.title("wavefront, from slopes")
+plt.xlabel('position [um]')
+plt.ylabel('position [um]')
+plt.show()

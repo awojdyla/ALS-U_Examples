@@ -5,3 +5,4 @@ workspaces/
 *.inp
 *.out
 *.spec
+scripts/older/

@@ -10,25 +10,84 @@ Please note that there are many other examples available here: [https://github.c
 
 ## Examples
 ### Mirror deformation under heatload
+For DLSR and FEL, the first mirror (HHLO or HOMS) will experience a servere heatload, with the incident beam carrying up to 20kW. Even with very efficient cooling, the mirror will bulge and cause some wavefront error. We have studied these effects with FEM using ANSYS, and we provide a script that adequately loads the deformed mirror shape and allows to study the propagation.
 
-### Tilt analyzer
+- python script: [wavefront.py](https://github.com/awojdyla/ALS-U_Examples/blob/master/scripts/hhlo.py)
+- OASYS workspace: [Wavefront.ows](https://github.com/awojdyla/ALS-U_Examples/blob/master/OASYS_examples/HHLO.ows)
 
-### Wavefront sensing
+A sample ANSYS deformation file is available here : [49_7.txt](https://github.com/awojdyla/ALS-U_Examples/blob/master/assets/49_7.txt)
+
+### Wavefront 
+We have written a script that allows to retrieve the wavefront after an element. For the script to work, 
+
+![wavefront](https://github.com/awojdyla/ALS-U_Examples/blob/master/images/oasys_wavefront.png)
+
+- python script: [wavefront.py](https://github.com/awojdyla/ALS-U_Examples/blob/master/scripts/wavefront.py)
+- OASYS workspace: [Wavefront.ows](https://github.com/awojdyla/ALS-U_Examples/blob/master/OASYS_examples/Wavefront.ows)
+- jupyter notebook: [Wavefront.ipynb](https://github.com/awojdyla/ALS-U_Examples/blob/master/Shadow_examples/Wavefront.ipynb)
+
+_It seems that this element works well with toroidal mirrors, but at the moment compound focusing elements such as KB pairs seems to have some issues associated with the optical path. See "Hartmann sensor" below for a workaround_
+
+### Wavefront analyzer
+Decomposition of the wavefront on a Zernike basis. __This requires [poppy](https://github.com/mperrin/poppy)__ and might not work straight out of the box.
+
+![zernikes](https://github.com/awojdyla/ALS-U_Examples/blob/master/images/oasys_zernikes.png)
+
+- python script: [zernikes.py](https://github.com/awojdyla/ALS-U_Examples/blob/master/scripts/zernikes.py)
+- OASYS workspace: [Zernikes.ows](https://github.com/awojdyla/ALS-U_Examples/blob/master/OASYS_examples/Zernikes.ows)
+- jupyter notebook: [Zernikes.ipynb](https://github.com/awojdyla/ALS-U_Examples/blob/master/Shadow_examples/Zernikes.ipynb)
+
+### Tilt sensitivity analyzer
+Since the misalignment of an optics can cause aberrations, it can be intersting to study the sensitivity to this misalignment. In this example, we show how in particular how astigmatism and coma change as a toroid is rotated along the tangential direction.
+
+This is an example of use of [poppy](https://github.com/mperrin/poppy) outside the OASYS environment, which can be useful if you couldn't make the previous example wrok (don't forget to install poppy by running `pip install poppy` in the terminal!)
+
+![tilt](https://github.com/awojdyla/ALS-U_Examples/blob/master/images/toroid_tilt.png)
+
+- jupyter notebook: [Tilt.ipynb](https://github.com/awojdyla/ALS-U_Examples/blob/master/Shadow_examples/Tilt.ipynb)
 
 ### Hartmann sensor
+In order to get an unbiased estimate of the wavefront, it is possible to use the slope at a certain location in the beam to estimate the wavefront errors. 
+
+This is a workaround for the case where using the optical path length in the beam fails (e.g. many compounded optical elements or large source/incoherent illumination)
+
+__This is still under development__: The reconstruction has numerical errors, and the units are not properly taken into account
+
+![hartmann](https://github.com/awojdyla/ALS-U_Examples/blob/master/images/hartmann.png)
+
+- python script: [hartmann.py](https://github.com/awojdyla/ALS-U_Examples/blob/master/scripts/hartmann.py)
+- OASYS workspace: [Hartmann.ows](https://github.com/awojdyla/ALS-U_Examples/blob/master/OASYS_examples/Hartmann.ows)
 
 ### Beamline energy resolution
 We have written a script that allows to visualize various colors, to have a rough estimate of how the various wavelength blend during propagations and determine whether the resolution of the beamline will meet the specfications
 
-![image](https://github.com/awojdyla/ALS-U_Examples/blob/master/images/oasys_colors.png)
+![colors](https://github.com/awojdyla/ALS-U_Examples/blob/master/images/oasys_colors.png)
 
 - python script: [colors.py](https://github.com/awojdyla/ALS-U_Examples/blob/master/scripts/colors.py)
 - OASYS workspace: [Colors.ows](https://github.com/awojdyla/ALS-U_Examples/blob/master/OASYS_examples/Colors.ows)
 - jupyter notebook: [colors.ipynb](https://github.com/awojdyla/ALS-U_Examples/blob/master/Shadow_examples/Colors.ipynb)
 
 ### Hettrick Underwood monochromator
+The Hettrick Underwood monochromator is an example where the beam is focused before the monochromator (see MC Hettrick and JH Underwood "[Stigmatic high throughput monochromator for soft x rays](https://doi.org/10.1364/AO.25.004228)" (1986) for more information)
+
+- OASYS workspace: [Hettrick-Underwood.ows](https://github.com/awojdyla/ALS-U_Examples/blob/master/OASYS_examples/Hettrick-Underwood.ows)
+
 
 ### Notional ALS-U beamlines
+Two of the notional beamline for the ALS-U project have been modeled using optical beamline simulations:
+
+- [ALS-U SXR Flagship beamline.ows](https://github.com/awojdyla/ALS-U_Examples/blob/master/ALS-U%20SXR%20flagship%20beamline.ows)
+- [ALS-U TXR Flagship beamline.ows](https://github.com/awojdyla/ALS-U_Examples/blob/master/ALS-U%20TXR%20flagship%20beamline.ows)
+
+They bith aim at a 1:5000 energy resolution and a 5um beam at the exist slits, each operating in a different energy range (SXR: 250-1400eV; TXR:1-8keV)
+
+### Magic toroid configuration
+Toroidal mirrors do exhibit severe aberrations, but there is a configuration in which the primary coma vanishes, leading to superior optical performances -- this is a first step towards the ideal diaboloid shape. 
+For more information, see Appendix A in [McDowell et al.(2004)](https://doi.org/10.1107/S0909049504024835)
+
+- OASYS workspace: [Magic_Toroid.ows]((https://github.com/awojdyla/ALS-U_Examples/blob/master/OASYS_examples/Magic_Toroid.ows)
+)
+
 
 ## What we are working on
 We are interested in a number of optical beamline simulations that could be helpful for the DLSR and FEL community:

@@ -12,6 +12,8 @@ Please note that there are many other examples available here: [https://github.c
 ### Mirror deformation under heatload
 For DLSR and FEL, the first mirror (HHLO or HOMS) will experience a servere heatload, with the incident beam carrying up to 20kW. Even with very efficient cooling, the mirror will bulge and cause some wavefront error. We have studied these effects with FEM using ANSYS, and we provide a script that adequately loads the deformed mirror shape and allows to study the propagation.
 
+![hhlo](https://github.com/awojdyla/ALS-U_Examples/blob/master/images/hhlo.png)
+
 - python script: [wavefront.py](https://github.com/awojdyla/ALS-U_Examples/blob/master/scripts/hhlo.py)
 - OASYS workspace: [Wavefront.ows](https://github.com/awojdyla/ALS-U_Examples/blob/master/OASYS_examples/HHLO.ows)
 
@@ -98,10 +100,11 @@ We are interested in a number of optical beamline simulations that could be help
 - we would like to see to what extent [Forbes polynomials](https://www.osapublishing.org/oe/abstract.cfm?uri=oe-21-16-19061) can be used to describe mirror shapes more accurately, possibly using [QFit](https://pypi.python.org/pypi/Scikit-Qfit)
 
 ## Already integrated to OASYS
-Please refer to [OASYS1-ALS-ShadowOui](https://github.com/oasys-als-kit/OASYS1-ALS-ShadowOui)
+
+A few scripts we were working on have been integrated to the list of widgets in OASYS. Please refer to [OASYS1-ALS-ShadowOui](https://github.com/oasys-als-kit/OASYS1-ALS-ShadowOui)
 ### Creating a source based on SRW calculation
 
-### Scanning a parameter for mirrors and 
+### Scanning a parameter for mirrors and gratings
 
 ## How to make and use python scripts
 

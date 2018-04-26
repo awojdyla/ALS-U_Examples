@@ -18,6 +18,13 @@ Please note that there are many other examples available here: [https://github.c
 ### Hartmann sensor
 
 ### Beamline energy resolution
+We have written a script that allows to visualize various colors, to have a rough estimate of how the various wavelength blend during propagations and determine whether the resolution of the beamline will meet the specfications
+
+![image](https://github.com/awojdyla/ALS-U_Examples/blob/master/images/oasys_colors.png)
+
+- python script: [colors.py](https://github.com/awojdyla/ALS-U_Examples/blob/master/scripts/colors.py)
+- OASYS workspace: [Colors.ows](https://github.com/awojdyla/ALS-U_Examples/blob/master/OASYS_examples/Colors.ows)
+- jupyter notebook: [colors.ipynb](https://github.com/awojdyla/ALS-U_Examples/blob/master/Shadow_examples/Colors.ipynb)
 
 ### Hettrick Underwood monochromator
 

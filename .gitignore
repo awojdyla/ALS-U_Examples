@@ -1,3 +1,7 @@
 *.0*
 *.*~
-
+workspaces/
+*.dat
+*.inp
+*.out
+*.spec

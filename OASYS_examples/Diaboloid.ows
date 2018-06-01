@@ -18,7 +18,10 @@
 		<link enabled="true" id="4" sink_channel="Input Beam" sink_node_id="4" source_channel="Beam" source_node_id="1" />
 		<link enabled="true" id="5" sink_channel="Input Beam" sink_node_id="7" source_channel="Beam" source_node_id="2" />
 	</links>
-	<annotations />
+	<annotations>
+		<text font-family="Helvetica" font-size="16" id="0" rect="(104.0, 88.0, 225.0, 76.0)">Not working properly
+(toroid paramters wrong)</text>
+	</annotations>
 	<thumbnail />
 	<node_properties>
 		<properties format="pickle" node_id="0">gAN9cQAoWBQAAABhbmd1bGFyX2Rpc3RyaWJ1dGlvbnEBSwJYGwAAAGFuZ3VsYXJfZGlzdHJpYnV0
@@ -274,8 +277,8 @@ dGlvbl9hbmdsZV9kZWdxukdAVm987ZFoc1gVAAAAcmVmbGVjdGlvbl9hbmdsZV9tcmFkcbtHQBIA
 AAAAAABYEQAAAHJlZmxlY3Rpdml0eV90eXBlcbxLAFggAAAAcmVmcmFjdGl2ZV9pbmRleF9pbl9p
 bWFnZV9tZWRpdW1xvUcAAAAAAAAAAFghAAAAcmVmcmFjdGl2ZV9pbmRleF9pbl9vYmplY3RfbWVk
 aXVtcb5HAAAAAAAAAABYEwAAAHNhdmVkV2lkZ2V0R2VvbWV0cnlxv2NzaXAKX3VucGlja2xlX3R5
-cGUKccBYDAAAAFB5UXQ1LlF0Q29yZXHBWAoAAABRQnl0ZUFycmF5ccJDMgHZ0MsAAgAAAAAANgAA
-AFgAAAVNAAADKQAAADYAAABuAAAFTQAAAykAAAAAAAAAAAWgccOFccSHccVSccZYDwAAAHNlZWRf
+cGUKccBYDAAAAFB5UXQ1LlF0Q29yZXHBWAoAAABRQnl0ZUFycmF5ccJDMgHZ0MsAAgAAAAAAWgAA
+AIkAAAVxAAADWgAAAFoAAACfAAAFcQAAA1oAAAAAAAAAAAWgccOFccSHccVSccZYDwAAAHNlZWRf
 Zm9yX21vc2FpY3HHSovG7mBYEQAAAHNsaXRfY2VudGVyX3hheGlzcchHAAAAAAAAAABYEQAAAHNs
 aXRfY2VudGVyX3pheGlzcclHAAAAAAAAAABYEQAAAHNsaXRfaGVpZ2h0X3pheGlzccpHAAAAAAAA
 AABYEAAAAHNsaXRfd2lkdGhfeGF4aXNxy0cAAAAAAAAAAFgVAAAAc21fYW5nbGVfb2ZfaW5jaWRl

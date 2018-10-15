@@ -14,8 +14,8 @@ For DLSR and FEL, the first mirror (HHLO or HOMS) will experience a servere heat
 
 ![hhlo](https://github.com/awojdyla/ALS-U_Examples/blob/master/images/hhlo.png)
 
-- python script: [wavefront.py](https://github.com/awojdyla/ALS-U_Examples/blob/master/scripts/hhlo.py)
-- OASYS workspace: [Wavefront.ows](https://github.com/awojdyla/ALS-U_Examples/blob/master/OASYS_examples/HHLO.ows)
+- python script: [hhlo.py](https://github.com/awojdyla/ALS-U_Examples/blob/master/scripts/hhlo.py)
+- OASYS workspace: [HHLO.ows](https://github.com/awojdyla/ALS-U_Examples/blob/master/OASYS_examples/HHLO.ows)
 
 A sample ANSYS deformation file is available here : [49_7.txt](https://github.com/awojdyla/ALS-U_Examples/blob/master/assets/49_7.txt)
 

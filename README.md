@@ -6,6 +6,8 @@ Most of these capabilities have been ported to widgets, for easy reuse. These wi
 
 Questions relative to these scripts should be adressed to [Antoine Wojdyla](https://github.com/awojdyla/).
 
+Add widget-> OASYS1-ALS-ShadowOui
+
 Please note that there are many other examples available here: [https://github.com/oasys-kit/ShadowOui-Tutorial](https://github.com/oasys-kit/ShadowOui-Tutorial). 
 
 ## Examples
